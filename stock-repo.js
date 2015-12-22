@@ -3,6 +3,15 @@
 function repo(conn) {
     const collName = 'stock';
 
+    function getAll() {
+        return conn
+            .then(db => {
+                const collection = db.collection(collName);
+
+                return collection.find({}).toArray();
+            });
+    }
+
     function getByIsbn(isbn) {
         return conn
             .then(db => {
@@ -21,7 +30,7 @@ function repo(conn) {
             })
     }
 
-    return { getByIsbn, upsert }
+    return { getAll, getByIsbn, upsert }
 }
 
 module.exports = repo;

@@ -20,6 +20,7 @@ const routes = require('./routes')(stockRepo);
 
 app.use(bodyParser.json());
 
+app.get('/stock', routes.stock.getAll);
 app.get('/stock/:isbn', routes.stock.get);
 app.post('/stock', routes.stock.post);
 

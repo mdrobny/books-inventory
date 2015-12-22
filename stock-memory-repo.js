@@ -4,6 +4,10 @@ function repo() {
     let stock = new Map();
 
     return {
+        getAll() {
+            return Array.from(stock.values());
+        },
+
         getByIsbn(isbn) {
             if (!stock.has(isbn)) {
                 return Promise.resolve(null);

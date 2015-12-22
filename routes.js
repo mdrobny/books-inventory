@@ -3,6 +3,16 @@
 module.exports = function (stockRepo) {
     return {
         stock: {
+            getAll(req, res, next) {
+                stockRepo.getAll()
+                    .then(result => {
+                        res.status(200).json(result);
+                    })
+                    .catch(err => {
+                        next(err);
+                    });
+            },
+
             get(req, res, next) {
                 const isbn = req.params.isbn;
 
