@@ -1,8 +1,9 @@
 'use strict';
 
+const config = require('./config');
 const app = require('./app');
 
-const server = app.listen(8080, () => {
+const server = app.listen(config.SERVER_PORT, () => {
     const host = server.address().address;
     const port = server.address().port;
 

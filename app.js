@@ -4,8 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 
+const config = require('./config');
 const app = express();
-const url = 'mongodb://192.168.99.100:27017/booksStorage';
+const url = config.MONGOLAB_URI;
 
 let stockRepo = null;
 if (process.env.NODE_ENV === 'testing') {
