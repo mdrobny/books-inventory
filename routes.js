@@ -16,12 +16,19 @@ module.exports = function (stockRepo) {
             get(req, res, next) {
                 const isbn = req.params.isbn;
 
+                const returnHtml = req.headers.accept === 'html';
+
                 stockRepo.getByIsbn(isbn)
                     .then(result => {
                         if (!result) {
                             return next();
                         }
-                        res.status(200).json(result);
+                        if (returnHtml) {
+                            const html = `<div class="stock-value">Count: ${result.count}</div>`;
+                            res.status(200).send(html);
+                        } else {
+                            res.status(200).json(result);
+                        }
                     })
                     .catch(err => {
                         next(err);
